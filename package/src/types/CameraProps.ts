@@ -116,6 +116,20 @@ export interface CameraProps extends ViewProps {
    * @default "off"
    */
   torch?: 'off' | 'on'
+
+  /**
+  * Specifies the torchLevel factor of the current camera, in "factor"/scale.
+  *
+  * This value ranges from `torchLevel` (e.g. `1`) to `torchLevel` (e.g. `128`). It is recommended to set this value
+  * to the CameraDevice's `torchLevel` per default and let the user torchLevel out to the fish-eye (ultra-wide) camera
+  * on demand (if available)
+  *
+  * **Note:** Linearly increasing this value always appears logarithmic to the user.
+  *
+  * @default 1.0
+  */
+  torchLevel?: number
+
   /**
    * Specifies the zoom factor of the current camera, in "factor"/scale.
    *
