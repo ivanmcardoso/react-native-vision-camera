@@ -199,12 +199,12 @@ final class CameraSession: NSObject, AVCaptureVideoDataOutputSampleBufferDelegat
         self.checkIsActive(configuration: config)
 
         // 11. Enable or disable the Torch if needed (requires session to be running)
-        if difference.torchChanged {
+        if difference.torchChanged || difference.torchLevelChanged {
           try device.lockForConfiguration()
           defer {
             device.unlockForConfiguration()
           }
-          try self.configureTorch(configuration: config, device: device)
+            try self.configureTorch(configuration: config, device: device)
         }
 
         // After configuring, set this to the new configuration.

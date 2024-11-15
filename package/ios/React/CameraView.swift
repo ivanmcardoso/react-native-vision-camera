@@ -59,6 +59,7 @@ public final class CameraView: UIView, CameraSessionDelegate, PreviewViewDelegat
   // other props
   @objc var isActive = false
   @objc var torch = "off"
+  @objc var torchLevel: NSNumber = 1.0 // in "factor"
   @objc var zoom: NSNumber = 1.0 // in "factor"
   @objc var exposure: NSNumber = 0.0
   @objc var videoStabilizationMode: NSString?
@@ -263,6 +264,7 @@ public final class CameraView: UIView, CameraSessionDelegate, PreviewViewDelegat
       config.maxFps = maxFps?.int32Value
       config.enableLowLightBoost = lowLightBoost
       config.torch = try Torch(jsValue: torch)
+      config.torchLevel = torchLevel.doubleValue
 
       // Zoom
       config.zoom = zoom.doubleValue

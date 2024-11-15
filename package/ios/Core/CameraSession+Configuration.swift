@@ -293,7 +293,7 @@ extension CameraSession {
    Configures the torch.
    The CaptureSession has to be running for the Torch to work.
    */
-  func configureTorch(configuration: CameraConfiguration, device: AVCaptureDevice) throws {
+    func configureTorch(configuration: CameraConfiguration, device: AVCaptureDevice) throws {
     // Configure Torch
     let torchMode = configuration.torch.toTorchMode()
     if device.torchMode != torchMode {
@@ -302,10 +302,11 @@ extension CameraSession {
       }
 
       device.torchMode = torchMode
-      if torchMode == .on {
-        try device.setTorchModeOn(level: 1.0)
-      }
     }
+        if torchMode == .on && configuration.torchLevel != 0 {
+            try device.setTorchModeOn(level: Float(configuration.torchLevel ?? 1.0))
+    }
+        
   }
 
   // pragma MARK: Zoom

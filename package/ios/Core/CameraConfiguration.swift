@@ -40,6 +40,7 @@ final class CameraConfiguration {
   var maxFps: Int32?
   var enableLowLightBoost = false
   var torch: Torch = .off
+  var torchLevel: CGFloat?
 
   // Zoom
   var zoom: CGFloat?
@@ -69,6 +70,7 @@ final class CameraConfiguration {
       maxFps = other.maxFps
       enableLowLightBoost = other.enableLowLightBoost
       torch = other.torch
+      torchLevel = other.torchLevel
       zoom = other.zoom
       exposure = other.exposure
       isActive = other.isActive
@@ -96,6 +98,7 @@ final class CameraConfiguration {
     let formatChanged: Bool
     let sidePropsChanged: Bool
     let torchChanged: Bool
+    let torchLevelChanged: Bool
     let zoomChanged: Bool
     let exposureChanged: Bool
 
@@ -135,6 +138,7 @@ final class CameraConfiguration {
       // torch (depends on isActive)
       let wasInactiveAndNeedsToEnableTorchAgain = left?.isActive == false && right.isActive == true && right.torch == .on
       torchChanged = inputChanged || wasInactiveAndNeedsToEnableTorchAgain || left?.torch != right.torch
+      torchLevelChanged = inputChanged || left?.torchLevel != right.torchLevel
       // zoom (depends on format)
       zoomChanged = formatChanged || left?.zoom != right.zoom
       // exposure (depends on device)
